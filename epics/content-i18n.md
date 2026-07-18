@@ -24,7 +24,7 @@ See [`content-i18n-architecture.md`](../content-i18n-architecture.md).
 Order is suggested; each row is one harness Feature in that repo (N per repo allowed).
 
 
-| Order | Repo           | Slug (proposed)              | Intent                                                                                           | Status  |
+| Order | Repo           | Slug                         | Intent                                                                                           | Status  |
 | ----- | -------------- | ---------------------------- | ------------------------------------------------------------------------------------------------ | ------- |
 | 1     | market-data-fe | content-message-contract     | `MessageRef` / `ResolvedMessage` schemas + code registry shape inside FE Content module          | Pending |
 | 2     | market-data-fe | content-catalogs-v1          | Catalogs + `en`/`ui` templates + in-process `resolve` in FE Content module                       | Pending |
@@ -34,7 +34,7 @@ Order is suggested; each row is one harness Feature in that repo (N per repo all
 | 6     | market-data-fe | analysis-classification-copy | Wire analysis/classification VMs to resolved messages (summaries, rationale, levels as designed) | Pending |
 
 
-> Slugs are proposals until added to each repo’s `work/feature_list.json`. Creating a Feature remains a harness step per PROJECT_ROOT.
+> Slugs confirmed in each repo’s `work/feature_list.json` (status `Pending`). Run `Start Feature <slug>` per PROJECT_ROOT in the order above.
 >
 > `shared/` stays the OpenAPI snapshot only; sync it when BE DTOs change. It is not a Content PROJECT_ROOT for this epic.
 
