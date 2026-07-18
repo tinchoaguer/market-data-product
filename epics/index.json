@@ -1,0 +1,58 @@
+[
+  {
+    "id": 1,
+    "slug": "backend-platform",
+    "title": "Backend Platform",
+    "status": "Done",
+    "retrospective": true
+  },
+  {
+    "id": 2,
+    "slug": "analysis-classification-engine",
+    "title": "Analysis & Classification Engine",
+    "status": "Done",
+    "retrospective": true
+  },
+  {
+    "id": 3,
+    "slug": "market-apis",
+    "title": "Market APIs",
+    "status": "Done",
+    "retrospective": true
+  },
+  {
+    "id": 4,
+    "slug": "openapi-reason-contracts",
+    "title": "OpenAPI Reason Contracts",
+    "status": "Done",
+    "retrospective": true
+  },
+  {
+    "id": 5,
+    "slug": "design-system-shell",
+    "title": "Design System & App Shell",
+    "status": "Done",
+    "retrospective": true
+  },
+  {
+    "id": 6,
+    "slug": "market-data-surfaces",
+    "title": "Market Data Surfaces",
+    "status": "Done",
+    "retrospective": true
+  },
+  {
+    "id": 7,
+    "slug": "client-label-humanization",
+    "title": "Client Label Humanization",
+    "status": "Done",
+    "retrospective": true
+  },
+  {
+    "id": 8,
+    "slug": "content-i18n",
+    "title": "Content & Internationalization",
+    "status": "Planned",
+    "retrospective": false
+  }
+]
