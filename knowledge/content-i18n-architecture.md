@@ -98,7 +98,7 @@ later
 | Fallback (missing key → code / default locale) | ● | |
 | Channels (ui first) | ● | email, push, sms, in-app |
 | Plurals / gender / select (ICU) | ○ | ● |
-| Rich text / markdown slots | ○ | ● |
+| Rich text / markdown slots | ○ | ● — see [`content-rich-text-architecture.md`](./content-rich-text-architecture.md) |
 | Nested / composed messages | ○ | ● |
 | A/B / experiment copy variants | ○ | ● |
 | Tone / brand voice packs | ○ | ● |
