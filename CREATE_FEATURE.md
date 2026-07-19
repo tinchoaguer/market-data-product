@@ -9,17 +9,17 @@ Features live in each adopting repo’s `work/feature_list.json`. They are the e
 ## Model
 
 ```text
-Epic (product/)  →  1..N Features per repo  →  each Feature = one harness cycle in that repo
+Epic (product/)  →  1..N Features per repo  →  Release (product cut)  →  each Feature = one harness cycle
 ```
 
-| | Epic | Feature |
-|--|------|---------|
-| Where | `product/epics/<slug>.md` + `index.json` | `<repo>/work/feature_list.json` |
-| Scope | Product outcome; may span repos | **Single** PROJECT_ROOT |
-| Count | 1..N features **per** repo | One slug, one workflow |
-| Execution | Planning only | `Start Feature <slug>` in that PROJECT_ROOT |
+| | Epic | Feature | Release |
+|--|------|---------|---------|
+| Where | `product/epics/<slug>.md` + `index.json` | `<repo>/work/feature_list.json` | `product/releases/` |
+| Scope | Product outcome; may span repos | **Single** PROJECT_ROOT | Cross-repo ship unit |
+| Count | 1..N features **per** repo | One slug, one workflow | Subset or whole epic(s) |
+| Execution | Planning only | `Start Feature <slug>` in that PROJECT_ROOT | Docs + pins only |
 
-**Never** implement cross-repo work as one Feature. Split by repo; link via Epic and/or description.
+**Never** implement cross-repo work as one Feature. Split by repo; link via Epic and/or description. Ship cuts: `CREATE_RELEASE.md`.
 
 ---
 
@@ -45,13 +45,17 @@ Only folders marked Yes (or newly adopted per `harness/governance/deployment.md`
 |----------|---------|
 | `CREATE_EPIC.md` | How to create/update Epics |
 | `CREATE_FEATURE.md` | This file |
+| `CREATE_RELEASE.md` | How to create/update Releases |
 | `agents/epic-writer.md` | Agent role: `create epic {idea}` |
 | `agents/feature-writer.md` | Agent role: `create features for epic {slug}` |
+| `agents/release-writer.md` | Agent role: `create release {version or idea}` |
 | `deployment.md` | Install agents (Cursor / other IDEs) |
-| `README.md` | Product vs Feature layers |
+| `README.md` | Product vs Feature vs Release layers |
 | `epics/index.json` | Epic registry |
-| `epics/<slug>.md` | Epic body (outcome, feature table, acceptance) |
-| `*-architecture.md` | Long-lived design notes (optional Epic link) |
+| `epics/<slug>.md` | Epic body (outcome, feature table with Release column, acceptance) |
+| `releases/index.json` | Release registry |
+| `releases/<version>.md` | Release body (features in cut, repo pins) |
+| `knowledge/`, `*-architecture.md` | Long-lived design notes (optional Epic/Release link) |
 
 ### Harness (`harness/`) — authority for workflow
 
@@ -132,7 +136,7 @@ If the outcome spans repos and no Epic exists, prefer `CREATE_EPIC.md` first, th
 3. In that repo, read `work/feature_list.json` and pick next `id` (max + 1).
 4. Choose `slug` (kebab-case, unique **in that repo**). Prefer Epic’s proposed slug if present.
 5. Append a Feature entry (schema below). Status must be `Pending`.
-6. Optionally update the Epic Features table: set Status from `Proposed` → `Pending` and confirm the slug.
+6. Optionally update the Epic Features table: set Status from `Proposed` → `Pending`, confirm the slug, and preserve the **Release** column if already set (do not invent a release here — use `CREATE_RELEASE.md`).
 7. Do **not** create `specs/<slug>/`, do **not** edit `work/progress/current.md`, do **not** run Orchestrator stages.
 8. If the target folder has no harness layout yet (see Workspace folders table): stop and tell the user to adopt via `harness/governance/deployment.md` before adding Features.
 
@@ -190,6 +194,7 @@ Tell the user:
 |--------|----------------|
 | Group multi-repo outcome | `create epic {idea}` → `agents/epic-writer.md` / `CREATE_EPIC.md` |
 | Add backlog from Epic | `create features for epic {slug}` → `agents/feature-writer.md` / this file |
+| Group Features into a ship cut | `create release {version}` → `agents/release-writer.md` / `CREATE_RELEASE.md` |
 | Execute Feature | `Start Feature <slug>` (Orchestrator) |
 | Install agents | `product/deployment.md` |
 | Harness rules | `harness/governance/*` via repo `HARNESS.md` |

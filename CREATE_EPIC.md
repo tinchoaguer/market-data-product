@@ -9,17 +9,19 @@ Epics live in `product/epics/`. They complement per-repo SDD + harness. They do 
 ## Model
 
 ```text
-Epic (product/)  →  1..N Features per repo  →  each Feature = one harness cycle in that repo
+Epic (product/)  →  1..N Features per repo  →  Release (product cut)  →  each Feature = one harness cycle
 ```
 
-| | Epic | Feature |
-|--|------|---------|
-| Where | `product/epics/<slug>.md` + `index.json` | `<repo>/work/feature_list.json` |
-| Scope | Product outcome; may span repos | Single repo |
-| Count | 1..N features **per** repo | One slug, one workflow |
-| Execution | Planning only | `Start Feature <slug>` in that PROJECT_ROOT |
+| | Epic | Feature | Release |
+|--|------|---------|---------|
+| Where | `product/epics/<slug>.md` + `index.json` | `<repo>/work/feature_list.json` | `product/releases/` |
+| Scope | Product outcome; may span repos | Single repo | Cross-repo ship unit |
+| Count | 1..N features **per** repo | One slug, one workflow | Subset or whole epic(s) |
+| Execution | Planning only | `Start Feature <slug>` in that PROJECT_ROOT | Docs + pins only |
 
 **Never** implement cross-repo work as one harness Feature.
+
+Ship cuts and version pins: `CREATE_RELEASE.md`. Epic Features tables include a **Release** column; the release file is SoT for the cut.
 
 ---
 
@@ -33,7 +35,7 @@ Open via `market-data-workspace.code-workspace`. Use these names in Epic `repos:
 | `market-data-fe` | Frontend app | Yes — PROJECT_ROOT |
 | `market-data-brand` | Design system, tokens, UI kit, wording | Yes — PROJECT_ROOT |
 | `shared` | Cross-repo contracts (e.g. OpenAPI snapshot) | Only after harness adoption |
-| `product` | Epics + product architecture | No — planning only |
+| `product` | Epics, releases, product architecture | No — planning only |
 | `harness` | Reusable SDD governance + agents | No |
 
 Epic `repos:` lists folders that participate in the outcome (including planning-only ones when relevant). Feature rows must target a folder that can host `work/feature_list.json` (or note that adoption is required first).
@@ -61,7 +63,8 @@ Do **not** create an Epic for a tiny single-repo task — add a Feature there in
 5. If Features already exist in repos, link their real slugs + statuses.
 6. If Features are new: list **proposed** slugs under Features; tell the user they must be added to each repo’s `feature_list.json` before `Start Feature`.
 7. Do **not** invent Feature specs (`specs/`) from the Epic alone — Spec Writer runs per Feature after harness start.
-8. Optional: link architecture notes under `product/*.md`.
+8. Optional: link architecture notes under `product/knowledge/` or `product/*-architecture.md`.
+9. Optional: assign Features to a Release (`CREATE_RELEASE.md`) and set the **Release** column.
 
 ---
 
@@ -76,7 +79,7 @@ outcome: <one sentence product outcome>
 status: Planned | Active | Done | Dropped
 retrospective: false
 repos: [<market-data-be|market-data-fe|market-data-brand|shared|product>, ...]
-architecture: <optional relative path to product/*.md>
+architecture: <optional relative path to product/knowledge/*.md or product/*.md>
 ---
 
 # <Title>
@@ -87,12 +90,14 @@ architecture: <optional relative path to product/*.md>
 
 ## Features
 
-| Order | Repo | Slug | Intent | Status |
-|------:|------|------|--------|--------|
-| 1 | market-data-be | example-slug | … | Pending |
+| Order | Repo | Slug | Intent | Status | Release |
+|------:|------|------|--------|--------|---------|
+| 1 | market-data-be | example-slug | … | Pending | 0.2.0 |
 
 Status values for linked features: `Pending` | `In Progress` | `Done` | `Blocked` | `Proposed`
 (Use `Proposed` until the slug exists in that repo’s feature_list.json.)
+
+**Release** column: product cut version (e.g. `0.2.0`) or empty if unassigned. SoT for the cut is `product/releases/<version>.md`.
 
 ## Acceptance (product)
 
@@ -144,7 +149,8 @@ Retrospective epics: `retrospective: true`, usually `status: Done`, Features alr
 - Features are vertically sliceable; each can be specified and reviewed alone.
 - Same repo may appear many times (multiple Features).
 - Prefer replace over patch when direction changes (note superseded epics).
-- Keep the epic file brief; put deep design in `product/<topic>-architecture.md`.
+- Keep the epic file brief; put deep design in `product/knowledge/` or `product/<topic>-architecture.md`.
+- When Features belong to a ship cut, keep **Release** aligned with `product/releases/`.
 
 ---
 
@@ -154,6 +160,6 @@ Tell the user:
 
 1. Path of the new epic file.
 2. Which Feature slugs are `Proposed` vs already in `feature_list.json`.
-3. Next step: run `create features for epic <slug>` (feature-writer), then `Start Feature <slug>` in each PROJECT_ROOT in the suggested order.
+3. Next step: run `create features for epic <slug>` (feature-writer), then optionally `create release {version}` to assign the cut, then `Start Feature <slug>` in each PROJECT_ROOT in the suggested order.
 
 Agent entrypoint: `product/agents/epic-writer.md` (see `product/deployment.md`).

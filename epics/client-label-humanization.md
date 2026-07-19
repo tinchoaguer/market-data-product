@@ -16,10 +16,10 @@ Short-term FE catalogs + `resolveLabel` humanize analysis/classification codes i
 
 ## Features
 
-| Repo | Slug | Status |
-|------|------|--------|
-| market-data-fe | human-readable-labels | Done |
-| market-data-fe | extend-human-readable-labels | Done |
+| Repo | Slug | Status | Release |
+|------|------|--------|---------|
+| market-data-fe | human-readable-labels | Done | 0.1.0 |
+| market-data-fe | extend-human-readable-labels | Done | 0.1.0 |
 
 ## Acceptance (product)
 

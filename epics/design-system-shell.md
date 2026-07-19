@@ -16,10 +16,10 @@ Brand ships consumable UI primitives; FE wraps Market Data / Analysis / Classifi
 
 ## Features
 
-| Repo | Slug | Status |
-|------|------|--------|
-| market-data-brand | brand-ui-kit | Done |
-| market-data-fe | app-layout | Done |
+| Repo | Slug | Status | Release |
+|------|------|--------|---------|
+| market-data-brand | brand-ui-kit | Done | 0.1.0 |
+| market-data-fe | app-layout | Done | 0.1.0 |
 
 ## Acceptance (product)
 

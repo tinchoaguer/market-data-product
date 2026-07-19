@@ -44,7 +44,7 @@ When an epic slug is given, follow the playbook steps for creating Features from
 
 - Follow `product/CREATE_FEATURE.md` exactly.
 - Append Feature entries with status `Pending` and the next numeric `id` per PROJECT_ROOT.
-- Update the Epic Features table when the playbook requires (`Proposed` → `Pending`, confirm slugs).
+- Update the Epic Features table when the playbook requires (`Proposed` → `Pending`, confirm slugs; preserve **Release** if set).
 - If a target folder is not harness-adopted, stop and report per the playbook — do not invent a PROJECT_ROOT layout unless the user explicitly asks to bootstrap.
 - After finishing, report outcomes per the playbook’s “After creating the Feature(s)” section.
 
@@ -71,9 +71,11 @@ You may read:
 
 - product/CREATE_FEATURE.md
 - product/CREATE_EPIC.md (boundary only)
+- product/CREATE_RELEASE.md (boundary only; do not create releases)
 - product/README.md
 - product/deployment.md
 - product/epics/<slug>.md and linked architecture
+- product/releases/ (read-only, when mirroring Release column)
 - harness/governance/schemas.md (Feature List schema)
 - harness/governance/deployment.md (when a target is not adopted)
 - Each target PROJECT_ROOT: `work/feature_list.json`, `knowledge/architecture.md`, `knowledge/conventions.md` (for quality of description/acceptance) — which folders qualify is in `CREATE_FEATURE.md`

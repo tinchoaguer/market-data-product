@@ -16,11 +16,11 @@ Three primary product screens wired to the corresponding backend APIs, with load
 
 ## Features
 
-| Repo | Slug | Status |
-|------|------|--------|
-| market-data-fe | view-market-data | Done |
-| market-data-fe | view-market-analysis | Done |
-| market-data-fe | view-market-classification | Done |
+| Repo | Slug | Status | Release |
+|------|------|--------|---------|
+| market-data-fe | view-market-data | Done | 0.1.0 |
+| market-data-fe | view-market-analysis | Done | 0.1.0 |
+| market-data-fe | view-market-classification | Done | 0.1.0 |
 
 ## Acceptance (product)
 

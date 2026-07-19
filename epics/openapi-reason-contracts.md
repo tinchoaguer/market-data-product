@@ -16,10 +16,10 @@ Analysis and classification expose enum-closed reason (and regime) codes in Open
 
 ## Features
 
-| Repo | Slug | Status |
-|------|------|--------|
-| market-data-be | classification-reason-codes | Done |
-| market-data-be | analysis-reason-codes | Done |
+| Repo | Slug | Status | Release |
+|------|------|--------|---------|
+| market-data-be | classification-reason-codes | Done | 0.1.0 |
+| market-data-be | analysis-reason-codes | Done | 0.1.0 |
 
 ## Acceptance (product)
 

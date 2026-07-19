@@ -1,0 +1,28 @@
+[
+  {
+    "id": 1,
+    "version": "0.1.0",
+    "slug": "0.1.0",
+    "title": "Baseline product cut",
+    "status": "Shipped",
+    "date": "2026-07-14",
+    "epics": [
+      "backend-platform",
+      "analysis-classification-engine",
+      "market-apis",
+      "openapi-reason-contracts",
+      "design-system-shell",
+      "market-data-surfaces",
+      "client-label-humanization"
+    ]
+  },
+  {
+    "id": 2,
+    "version": "0.2.0",
+    "slug": "0.2.0",
+    "title": "Content & Internationalization v1",
+    "status": "Planned",
+    "date": null,
+    "epics": ["content-i18n"]
+  }
+]

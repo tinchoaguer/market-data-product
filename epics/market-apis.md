@@ -16,11 +16,11 @@ Stable HTTP surfaces for the three product reads: market-data, analysis, classif
 
 ## Features
 
-| Repo | Slug | Status |
-|------|------|--------|
-| market-data-be | market-data-api | Done |
-| market-data-be | market-data-analysis-api | Done |
-| market-data-be | classification-api | Done |
+| Repo | Slug | Status | Release |
+|------|------|--------|---------|
+| market-data-be | market-data-api | Done | 0.1.0 |
+| market-data-be | market-data-analysis-api | Done | 0.1.0 |
+| market-data-be | classification-api | Done | 0.1.0 |
 
 ## Acceptance (product)
 

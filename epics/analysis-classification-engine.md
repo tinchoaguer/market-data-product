@@ -16,9 +16,9 @@ MarketData → analysis assessments → classification signals via an explicit m
 
 ## Features
 
-| Repo | Slug | Status |
-|------|------|--------|
-| market-data-be | analysis-classification-pipeline | Done |
+| Repo | Slug | Status | Release |
+|------|------|--------|---------|
+| market-data-be | analysis-classification-pipeline | Done | 0.1.0 |
 
 ## Acceptance (product)
 

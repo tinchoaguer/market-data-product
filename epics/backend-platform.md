@@ -16,11 +16,11 @@ HTTP application boots, exposes health, and loads market data through a provider
 
 ## Features
 
-| Repo | Slug | Status |
-|------|------|--------|
-| market-data-be | fastapi-bootstrap | Done |
-| market-data-be | mock-market-data-resources | Done |
-| market-data-be | market-data-provider | Done |
+| Repo | Slug | Status | Release |
+|------|------|--------|---------|
+| market-data-be | fastapi-bootstrap | Done | 0.1.0 |
+| market-data-be | mock-market-data-resources | Done | 0.1.0 |
+| market-data-be | market-data-provider | Done | 0.1.0 |
 
 ## Acceptance (product)
 

@@ -6,7 +6,7 @@ outcome: One Content module owns system language — domain emits MessageRef (co
 status: Planned
 retrospective: false
 repos: [market-data-fe, market-data-be]
-architecture: ../content-i18n-architecture.md
+architecture: ../knowledge/content-i18n-architecture.md
 ---
 
 # Content & Internationalization
@@ -17,27 +17,26 @@ Centralize communication: `MessageRef → resolve(locale, channel) → text`. BE
 
 ## Architecture
 
-See [`content-i18n-architecture.md`](../content-i18n-architecture.md).
+See [`content-i18n-architecture.md`](../knowledge/content-i18n-architecture.md).
 
 ## Features (planned)
 
 Order is suggested; each row is one harness Feature in that repo (N per repo allowed).
 
-
-| Order | Repo           | Slug                         | Intent                                                                                           | Status  |
-| ----- | -------------- | ---------------------------- | ------------------------------------------------------------------------------------------------ | ------- |
-| 1     | market-data-fe | content-message-contract     | `MessageRef` / `ResolvedMessage` schemas + code registry shape inside FE Content module          | Pending |
-| 2     | market-data-fe | content-catalogs-v1          | Catalogs + `en`/`ui` templates + in-process `resolve` in FE Content module                       | Pending |
-| 3     | market-data-be | analysis-message-refs        | Replace catalog/assessment prose and dumps with MessageRefs in analysis DTOs                     | Pending |
-| 4     | market-data-be | classification-message-refs  | Classification (and errors as needed) emit MessageRefs, not display English                      | Pending |
-| 5     | market-data-fe | content-resolve-boundary     | App boundary uses Content `resolve`; drop ad-hoc label SoT (`analysisLabels.*`, etc.)            | Pending |
-| 6     | market-data-fe | analysis-classification-copy | Wire analysis/classification VMs to resolved messages (summaries, rationale, levels as designed) | Pending |
-
+| Order | Repo           | Slug                         | Intent                                                                                           | Status  | Release |
+| ----- | -------------- | ---------------------------- | ------------------------------------------------------------------------------------------------ | ------- | ------- |
+| 1     | market-data-fe | content-message-contract     | `MessageRef` / `ResolvedMessage` schemas + code registry shape inside FE Content module          | Pending | 0.2.0   |
+| 2     | market-data-fe | content-catalogs-v1          | Catalogs + `en`/`ui` templates + in-process `resolve` in FE Content module                       | Pending | 0.2.0   |
+| 3     | market-data-be | analysis-message-refs        | Replace catalog/assessment prose and dumps with MessageRefs in analysis DTOs                     | Pending | 0.2.0   |
+| 4     | market-data-be | classification-message-refs  | Classification (and errors as needed) emit MessageRefs, not display English                      | Pending | 0.2.0   |
+| 5     | market-data-fe | content-resolve-boundary     | App boundary uses Content `resolve`; drop ad-hoc label SoT (`analysisLabels.*`, etc.)            | Pending | 0.2.0   |
+| 6     | market-data-fe | analysis-classification-copy | Wire analysis/classification VMs to resolved messages (summaries, rationale, levels as designed) | Pending | 0.2.0   |
 
 > Slugs confirmed in each repo’s `work/feature_list.json` (status `Pending`). Run `Start Feature <slug>` per PROJECT_ROOT in the order above.
 >
+> Ship cut: [`releases/0.2.0.md`](../releases/0.2.0.md).
+>
 > `shared/` stays the OpenAPI snapshot only; sync it when BE DTOs change. It is not a Content PROJECT_ROOT for this epic.
-
 
 ## Acceptance (product)
 

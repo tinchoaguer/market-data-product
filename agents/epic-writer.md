@@ -72,9 +72,12 @@ You may read:
 
 - product/CREATE_EPIC.md
 - product/CREATE_FEATURE.md (for Feature vs Epic boundary only)
+- product/CREATE_RELEASE.md (for Release column / cut boundary only)
 - product/README.md
 - product/deployment.md
 - product/epics/
+- product/releases/ (read-only unless also acting as release-writer)
+- product/knowledge/
 - product/*-architecture.md
 - Adopting repos’ `work/feature_list.json` (read-only, to link real slugs/statuses) — which folders qualify is in `CREATE_EPIC.md`
 
@@ -82,7 +85,7 @@ You may modify:
 
 - product/epics/<slug>.md
 - product/epics/index.json
-- product/*-architecture.md (when creating or updating linked design notes)
+- product/knowledge/* and product/*-architecture.md (when creating or updating linked design notes)
 
 You must not modify:
 
@@ -96,6 +99,7 @@ You must not modify:
 - Follow the playbook; do not invent a parallel Epic format.
 - Prefer product language outcomes over implementation detail.
 - Features in the epic table are vertically sliceable; one adopting repo per row (per playbook).
+- Include the **Release** column; leave empty if unassigned, or set when a cut already exists (`CREATE_RELEASE.md`).
 - Never fold cross-repo work into one harness Feature.
 - Remain deterministic; ask the user when the idea is too vague to choose targets or slices.
 - Prefer replace over patch when direction changes; note superseded epics.
