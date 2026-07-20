@@ -22,6 +22,6 @@ Product-level planning lives here. Per-repo SDD + harness stay in each project (
 | `agents/feature-writer.md` | `create features for epic {slug}` | `CREATE_FEATURE.md` |
 | `agents/release-writer.md` | `create release {version or idea}` | `CREATE_RELEASE.md` |
 
-Install and IDE wiring: [`deployment.md`](deployment.md). Same philosophy as `harness/agents/` — markdown roles + playbooks; Cursor (or any IDE) is packaging only.
+Install and IDE wiring: [`deployment.md`](deployment.md). Same philosophy as `harness/agents/` — markdown roles + playbooks; any IDE or agent host is packaging only.
 
 See also `epics/index.json` and `releases/index.json`.

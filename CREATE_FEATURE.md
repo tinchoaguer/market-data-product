@@ -49,7 +49,7 @@ Only folders marked Yes (or newly adopted per `harness/governance/deployment.md`
 | `agents/epic-writer.md` | Agent role: `create epic {idea}` |
 | `agents/feature-writer.md` | Agent role: `create features for epic {slug}` |
 | `agents/release-writer.md` | Agent role: `create release {version or idea}` |
-| `deployment.md` | Install agents (Cursor / other IDEs) |
+| `deployment.md` | Install agents (any IDE / agent host) |
 | `README.md` | Product vs Feature vs Release layers |
 | `epics/index.json` | Epic registry |
 | `epics/<slug>.md` | Epic body (outcome, feature table with Release column, acceptance) |

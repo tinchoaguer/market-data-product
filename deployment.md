@@ -2,7 +2,7 @@
 
 ## Purpose
 
-How to wire Market Data **product** agents (Epic Writer, Feature Writer, Release Writer) into an IDE.
+How to wire Market Data **product** agents (Epic Writer, Feature Writer, Release Writer) into an IDE or agent host.
 
 Behavior is defined by portable markdown:
 
@@ -47,50 +47,38 @@ product/
 
 ---
 
-# Cursor
+# Installing agents
 
-## Install agents
-
-Copy or symlink into the global Cursor agents directory (same pattern as harness):
+Copy or symlink product agent role cards into the directory your agent host uses for custom agents (same pattern as harness):
 
 ```text
-product/agents/epic-writer.md      → ~/.cursor/agents/epic-writer.md
-product/agents/feature-writer.md   → ~/.cursor/agents/feature-writer.md
-product/agents/release-writer.md   → ~/.cursor/agents/release-writer.md
+product/agents/epic-writer.md
+product/agents/feature-writer.md
+product/agents/release-writer.md
 ```
 
 Reuse the harness installer if available:
 
 ```bash
 # from harness/scripts/ (or equivalent)
-./install-agents.sh ../../product/agents ~/.cursor/agents symlink
+./install-agents.sh ../../product/agents <host-agents-dir> symlink
 ```
-
-On Windows (PowerShell), symlink example:
 
 ```powershell
-New-Item -ItemType SymbolicLink -Path "$env:USERPROFILE\.cursor\agents\epic-writer.md" -Target "<repo>\product\agents\epic-writer.md" -Force
-New-Item -ItemType SymbolicLink -Path "$env:USERPROFILE\.cursor\agents\feature-writer.md" -Target "<repo>\product\agents\feature-writer.md" -Force
-New-Item -ItemType SymbolicLink -Path "$env:USERPROFILE\.cursor\agents\release-writer.md" -Target "<repo>\product\agents\release-writer.md" -Force
+.\install-agents.ps1 -Source ..\..\product\agents -Destination <host-agents-dir> -Mode symlink
 ```
 
-YAML frontmatter (`name`, `description`, `model`, `readonly`) is for Cursor’s agent picker. Do not put product SoT only in `.cursor/rules`.
-
-## Invoke
-
-1. Open the Market Data multi-root workspace (`market-data-workspace.code-workspace`) so `product/` and adopting repos are visible.
-2. Select **epic-writer**, **feature-writer**, or **release-writer**.
-3. Run the matching user command above.
+Optional YAML frontmatter (`name`, `description`, `model`, `readonly`) is for hosts that use an agent picker. Behavior is defined by the markdown body and playbooks. Do not put product SoT only in IDE-specific rules files.
 
 ---
 
-# Other IDEs
+# Invoking
 
-1. Load `product/agents/epic-writer.md`, `feature-writer.md`, or `release-writer.md` as the agent / custom-agent system prompt (ignore or strip YAML frontmatter if the host does not use it).
-2. Ensure the workspace includes `product/` and the target repos.
-3. Use the same user commands; agents resolve paths from the open workspace.
+1. Open a workspace that includes `product/` and the adopting repos (e.g. multi-root `market-data-workspace.code-workspace`, or an equivalent IDE workspace).
+2. Load **epic-writer**, **feature-writer**, or **release-writer** as the agent / custom-agent system prompt (ignore or strip YAML frontmatter if the host does not use it).
+3. Run the matching user command above.
 
-No Cursor-only APIs are required for correct behavior.
+Agents resolve paths from the open workspace. No host-specific APIs are required for correct behavior.
 
 ---
 
@@ -104,7 +92,7 @@ No Cursor-only APIs are required for correct behavior.
 | Spec → Implement → Review | harness agents |
 | Governance (workflow, schemas) | `harness/governance/` |
 
-Install product agents **alongside** harness agents (`orchestrator`, `spec-writer`, `implementer`, `reviewer`).
+Install product agents **alongside** harness agents (`orchestrator`, `git-preflight`, `spec-writer`, `implementer`, `reviewer`).
 
 ---
 
@@ -113,5 +101,5 @@ Install product agents **alongside** harness agents (`orchestrator`, `spec-write
 When playbooks or role cards change:
 
 1. Pull updated `product/` files.
-2. Refresh IDE agent installs (re-copy or keep symlinks).
+2. Refresh agent-host installs (re-copy or keep symlinks).
 3. In-flight Epics/Features/Releases keep their artifacts; new commands use the updated playbooks.
