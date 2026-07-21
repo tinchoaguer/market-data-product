@@ -19,7 +19,7 @@ Epic (product/)  →  1..N Features per repo  →  Release (product cut)  →  e
 | Count | 1..N features **per** repo | One slug, one workflow | Subset or whole epic(s) |
 | Execution | Planning only | `Start Feature <slug>` in that PROJECT_ROOT | Docs + pins only |
 
-**Never** implement cross-repo work as one Feature. Split by repo; link via Epic and/or description. Ship cuts: `CREATE_RELEASE.md`.
+**Never** implement cross-repo work as one Feature. Split by repo; link via Epic (and Release). Ship cuts: `CREATE_RELEASE.md`.
 
 ---
 
@@ -38,6 +38,22 @@ Open via `market-data-workspace.code-workspace`. Use these names when choosing a
 
 Only folders marked Yes (or newly adopted per `harness/governance/deployment.md`) may receive a Feature entry.
 
+### Repo isolation (workspace rule)
+
+`product` and `shared` are the only places that know the workspace topology and how repos integrate.
+
+| Layer | Responsibility |
+|-------|----------------|
+| `market-data-be` / `fe` / `brand` | Isolated PROJECT_ROOTs. Specs, knowledge, and backlog describe **this repo only**. They may consume published packages (e.g. `@market-data/brand`) and network protocols (HTTP API). They must **not** document sibling folder paths, `shared/`, other product repos as Spec SoT, or Epic coordination. |
+| `harness` | Agnostic SDD tooling. No product folder names or workspace trees. |
+| `product` | Owns Epics, Releases, cross-Feature links, and integration policy. |
+| `shared` | Owns cross-repo contract artifacts (e.g. OpenAPI snapshot). |
+
+**Integration handoffs owned here (not in adopting-repo Specs):**
+
+- Refreshing `shared/openapi.json` from the BE app OpenAPI schema after public DTO changes (release/ops).
+- How FE obtains `@market-data/brand` for local workspace development (e.g. npm override / link). Adopting `market-data-fe` commits a **package** dependency (semver), not `file:../market-data-brand`.
+- Epic Feature tables link BE/FE/Brand work; adopting-repo `feature_list` descriptions stay repo-local.
 
 ### Product layer (`product/`)
 
@@ -98,7 +114,9 @@ Each adopting repo points here via `HARNESS.md` → `../harness/governance/`.
 
 ### Shared contracts (`shared/`)
 
-Today: `openapi.json` (API contract snapshot). Epics may propose `shared` Features; if so, adopt harness first (`harness/governance/deployment.md`), then add `work/feature_list.json`.
+Cross-repo artifacts (contract snapshots, shared packages) live here. Epics may propose `shared` Features; if so, adopt harness first (`harness/governance/deployment.md`), then add `work/feature_list.json`.
+
+Adopting-repo Features must not require creating or updating files outside their PROJECT_ROOT. Cross-repo contract refresh and local package linking are **product / shared** (or release) concerns — never Spec REQs/tasks of an adopting repo.
 
 ### Repo cheat-sheet (what Features usually touch)
 
@@ -169,11 +187,12 @@ Only Orchestrator (and human gates) move status after creation. New Features are
 ## Quality bar
 
 - **One repo, one outcome.** Description and acceptance stay inside that PROJECT_ROOT.
-- **Acceptance is observable** — UI/API behavior, contracts, or artifacts — not “refactor X” alone.
-- **Vertically sliceable** — Spec Writer can produce requirements/design/tasks without inventing other repos’ work.
+- **PROJECT_ROOT only.** Description and acceptance must not require paths or deliverables outside that repo; cross-repo artifacts are product/shared or release handoffs.
+- **Acceptance is observable** — UI/API behavior, contracts, or artifacts **in that repo** — not “refactor X” alone.
+- **Vertically sliceable** — Spec Writer can produce requirements/design/tasks without inventing other repos’ work (`harness/governance/spec_guidelines.md` Feature scope).
 - **Slug stable** — matches Epic table when linked; kebab-case; no reuse of Done slugs for different intent.
-- **Cross-repo links** — mention dependent slugs/repos in `description` or Epic Notes; do not merge them.
-- Prefer **replace over patch** when an Epic supersedes prior Features (note that in Epic / description).
+- **Cross-repo links** — live in the Epic Features table (and Release), not in adopting-repo descriptions, Specs, or knowledge.
+- Prefer **replace over patch** when an Epic supersedes prior Features (note that in the Epic).
 
 ---
 

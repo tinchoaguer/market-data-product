@@ -15,6 +15,7 @@ Product-level planning lives here. Per-repo SDD + harness stay in each project (
 - Start work with `Start Feature <slug>` inside the target repo. Epics only group and prioritize.
 - Releases group Features into a shippable cut. Epic Features tables include a **Release** column for glanceability; the release file is SoT for the cut.
 - Maturity scores are refreshed from `work/` + epics/releases evidence; they do not replace Features or Releases.
+- **Isolation:** BE, FE, and Brand do not document sibling repos, `shared/`, or workspace topology. Only `product` and `shared` know how the workspace integrates (see `CREATE_FEATURE.md` Repo isolation and [`knowledge/workspace-integration.md`](knowledge/workspace-integration.md)).
 
 ## Agents (portable)
 

@@ -152,7 +152,7 @@ In-process inside FE (v1) or HTTP (later). Same input/output.
 |--------|-------|
 | Stop emitting prose (`catalog_reason`, hard-gate f-strings, etc.) | Replace with `MessageRef` |
 | Domain/catalog builders return codes + params | Numbers/enums as params, not interpolated English |
-| HTTP DTOs: `message: { code, params }` (and lists where needed) | Reflect in OpenAPI; sync `shared/openapi.json` as the API snapshot |
+| HTTP DTOs: `message: { code, params }` (and lists where needed) | Reflect in **app** OpenAPI; BE Feature ACs assert the running schema. Cross-repo contract snapshots are out of BE Feature scope |
 | Drop display English from analysis/classification modules | Domain stays language-agnostic |
 | Optional: BE calls Content resolve only for server-rendered channels | Emails/notifications — after Content is a service; not required for UI v1 |
 | Errors: machine `code` + optional `MessageRef` | Clients resolve; no hardcoded error sentences in routes |
@@ -173,7 +173,7 @@ In-process inside FE (v1) or HTTP (later). Same input/output.
 
 | Change | Notes |
 |--------|-------|
-| Keep OpenAPI API snapshot in sync when BE DTOs gain `MessageRef` | Not a Content package host in v1 |
+| Keep the cross-repo OpenAPI snapshot current when BE DTOs change | **Not a harness Feature.** Product/shared (or release) handoff refreshes the snapshot from the BE app schema. Adopting repos do not Spec or document paths outside their PROJECT_ROOT |
 | No catalogs / templates / `resolve` here until (if ever) a shared package is intentionally bootstrapped | Prefer FE module → content-service |
 
 ### Out of this module
