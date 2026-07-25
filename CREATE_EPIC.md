@@ -162,4 +162,6 @@ Tell the user:
 2. Which Feature slugs are `Proposed` vs already in `feature_list.json`.
 3. Next step: run `create features for epic <slug>` (feature-writer), then optionally `create release {version}` to assign the cut, then `Start Feature <slug>` in each PROJECT_ROOT in the suggested order.
 
+If the outcome must adopt brand `visual-definitions` into an app repo, use **`create ux epic`** / [`CREATE_UX_EPIC.md`](CREATE_UX_EPIC.md) instead (see [`knowledge/ux-definitions-handoff.md`](knowledge/ux-definitions-handoff.md)).
+
 Agent entrypoint: `product/agents/epic-writer.md` (see `product/deployment.md`).

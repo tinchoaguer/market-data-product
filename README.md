@@ -16,6 +16,7 @@ Product-level planning lives here. Per-repo SDD + harness stay in each project (
 - Releases group Features into a shippable cut. Epic Features tables include a **Release** column for glanceability; the release file is SoT for the cut.
 - Maturity scores are refreshed from `work/` + epics/releases evidence; they do not replace Features or Releases.
 - **Isolation:** BE, FE, and Brand do not document sibling repos, `shared/`, or workspace topology. Only `product` and `shared` know how the workspace integrates (see `CREATE_FEATURE.md` Repo isolation and [`knowledge/workspace-integration.md`](knowledge/workspace-integration.md)).
+- **UX definitions:** when UI must adopt brand `visual-definitions`, use the UX path (`create ux epic` / `create ux features for epic`) so Feature Writer materializes `knowledge/ux/*-contract.md` in the target repo. Policy: [`knowledge/ux-definitions-handoff.md`](knowledge/ux-definitions-handoff.md).
 
 ## Agents (portable)
 
@@ -23,8 +24,12 @@ Product-level planning lives here. Per-repo SDD + harness stay in each project (
 |-------|---------|----------|
 | `agents/epic-writer.md` | `create epic {idea}` | `CREATE_EPIC.md` |
 | `agents/feature-writer.md` | `create features for epic {slug}` | `CREATE_FEATURE.md` |
+| `agents/ux-epic-writer.md` | `create ux epic {idea}` | `CREATE_UX_EPIC.md` |
+| `agents/ux-feature-writer.md` | `create ux features for epic {slug}` | `CREATE_UX_FEATURE.md` |
 | `agents/release-writer.md` | `create release {version or idea}` | `CREATE_RELEASE.md` |
 | `agents/maturity-writer.md` | `update maturity` | `UPDATE_MATURITY.md` |
+
+Use the **UX** agents when the outcome depends on brand `knowledge/visual-definitions/`. Otherwise use the generic epic/feature path.
 
 Install and IDE wiring: [`deployment.md`](deployment.md). Same philosophy as `harness/agents/` — markdown roles + playbooks; any IDE or agent host is packaging only.
 

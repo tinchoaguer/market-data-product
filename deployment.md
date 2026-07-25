@@ -2,12 +2,13 @@
 
 ## Purpose
 
-How to wire Market Data **product** agents (Epic Writer, Feature Writer, Release Writer, Maturity Writer) into an IDE or agent host.
+How to wire Market Data **product** agents (Epic Writer, Feature Writer, UX Epic Writer, UX Feature Writer, Release Writer, Maturity Writer) into an IDE or agent host.
 
 Behavior is defined by portable markdown:
 
-- Playbooks: `CREATE_EPIC.md`, `CREATE_FEATURE.md`, `CREATE_RELEASE.md`, `UPDATE_MATURITY.md`
+- Playbooks: `CREATE_EPIC.md`, `CREATE_FEATURE.md`, `CREATE_UX_EPIC.md`, `CREATE_UX_FEATURE.md`, `CREATE_RELEASE.md`, `UPDATE_MATURITY.md`
 - Role cards: `agents/*.md` (body)
+- UX handoff policy: `knowledge/ux-definitions-handoff.md`
 
 IDE-specific frontmatter and install paths are **packaging only**. Any agent host that can load a markdown system prompt can run these roles.
 
@@ -21,6 +22,8 @@ Product agents complement the AI Harness; they do not replace it. Execution rema
 product/
     CREATE_EPIC.md
     CREATE_FEATURE.md
+    CREATE_UX_EPIC.md
+    CREATE_UX_FEATURE.md
     CREATE_RELEASE.md
     UPDATE_MATURITY.md
     capability-maturity.md
@@ -29,6 +32,8 @@ product/
     agents/
         epic-writer.md
         feature-writer.md
+        ux-epic-writer.md
+        ux-feature-writer.md
         release-writer.md
         maturity-writer.md
     epics/
@@ -45,9 +50,13 @@ product/
 |---------|--------|----------|
 | `create epic {idea}` | epic-writer | `CREATE_EPIC.md` |
 | `create features for epic {slug}` | feature-writer | `CREATE_FEATURE.md` |
+| `create ux epic {idea}` | ux-epic-writer | `CREATE_UX_EPIC.md` |
+| `create ux features for epic {slug}` | ux-feature-writer | `CREATE_UX_FEATURE.md` |
 | `create release {version or idea}` | release-writer | `CREATE_RELEASE.md` |
 | `update maturity` | maturity-writer | `UPDATE_MATURITY.md` |
 | `Start Feature {slug}` | harness orchestrator | `harness/governance/workflow.md` |
+
+When the UI outcome depends on brand `visual-definitions`, use the **UX** commands so adopted contracts land under `<repo>/knowledge/ux/` before the harness runs.
 
 ---
 
@@ -58,6 +67,8 @@ Copy or symlink product agent role cards into the directory your agent host uses
 ```text
 product/agents/epic-writer.md
 product/agents/feature-writer.md
+product/agents/ux-epic-writer.md
+product/agents/ux-feature-writer.md
 product/agents/release-writer.md
 product/agents/maturity-writer.md
 ```
@@ -80,7 +91,7 @@ Optional YAML frontmatter (`name`, `description`, `model`, `readonly`) is for ho
 # Invoking
 
 1. Open a workspace that includes `product/` and the adopting repos (e.g. multi-root `market-data-workspace.code-workspace`, or an equivalent IDE workspace).
-2. Load **epic-writer**, **feature-writer**, **release-writer**, or **maturity-writer** as the agent / custom-agent system prompt (ignore or strip YAML frontmatter if the host does not use it).
+2. Load **epic-writer**, **feature-writer**, **ux-epic-writer**, **ux-feature-writer**, **release-writer**, or **maturity-writer** as the agent / custom-agent system prompt (ignore or strip YAML frontmatter if the host does not use it).
 3. Run the matching user command above.
 
 Agents resolve paths from the open workspace. No host-specific APIs are required for correct behavior.
@@ -92,7 +103,9 @@ Agents resolve paths from the open workspace. No host-specific APIs are required
 | Concern | Owner |
 |---------|--------|
 | Epic planning | product / epic-writer |
+| UX Epic planning (visual-definitions handoff) | product / ux-epic-writer |
 | Feature backlog entries | product / feature-writer → `<repo>/work/feature_list.json` |
+| UX Feature + adopted `knowledge/ux/*-contract.md` | product / ux-feature-writer |
 | Release cuts + version pins | product / release-writer → `product/releases/` |
 | Capability maturity scores | product / maturity-writer → `product/capability-maturity.md` |
 | Spec → Implement → Review | harness agents |

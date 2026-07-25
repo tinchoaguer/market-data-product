@@ -61,9 +61,13 @@ Only folders marked Yes (or newly adopted per `harness/governance/deployment.md`
 |----------|---------|
 | `CREATE_EPIC.md` | How to create/update Epics |
 | `CREATE_FEATURE.md` | This file |
+| `CREATE_UX_EPIC.md` | UX Epics with `## UX sources` (visual-definitions handoff) |
+| `CREATE_UX_FEATURE.md` | UX Features + adopted `knowledge/ux/*-contract.md` |
 | `CREATE_RELEASE.md` | How to create/update Releases |
 | `agents/epic-writer.md` | Agent role: `create epic {idea}` |
 | `agents/feature-writer.md` | Agent role: `create features for epic {slug}` |
+| `agents/ux-epic-writer.md` | Agent role: `create ux epic {idea}` |
+| `agents/ux-feature-writer.md` | Agent role: `create ux features for epic {slug}` |
 | `agents/release-writer.md` | Agent role: `create release {version or idea}` |
 | `deployment.md` | Install agents (any IDE / agent host) |
 | `README.md` | Product vs Feature vs Release layers |
@@ -72,6 +76,7 @@ Only folders marked Yes (or newly adopted per `harness/governance/deployment.md`
 | `releases/index.json` | Release registry |
 | `releases/<version>.md` | Release body (features in cut, repo pins) |
 | `knowledge/`, `*-architecture.md` | Long-lived design notes (optional Epic/Release link) |
+| `knowledge/ux-definitions-handoff.md` | Policy: brand UX SoT → adopted contracts |
 
 ### Harness (`harness/`) — authority for workflow
 
@@ -213,6 +218,7 @@ Tell the user:
 |--------|----------------|
 | Group multi-repo outcome | `create epic {idea}` → `agents/epic-writer.md` / `CREATE_EPIC.md` |
 | Add backlog from Epic | `create features for epic {slug}` → `agents/feature-writer.md` / this file |
+| UX outcome (adopt visual-definitions) | `create ux epic` / `create ux features for epic` → `CREATE_UX_EPIC.md` / `CREATE_UX_FEATURE.md` ([`knowledge/ux-definitions-handoff.md`](knowledge/ux-definitions-handoff.md)) |
 | Group Features into a ship cut | `create release {version}` → `agents/release-writer.md` / `CREATE_RELEASE.md` |
 | Execute Feature | `Start Feature <slug>` (Orchestrator) |
 | Install agents | `product/deployment.md` |
