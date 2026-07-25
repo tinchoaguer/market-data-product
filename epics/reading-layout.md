@@ -18,8 +18,8 @@ Users read one Symbol in a coherent analytical workspace: Context frames the Sym
 
 | Order | Repo | Slug | Intent | Status | Release |
 |------:|------|------|--------|--------|---------|
-| 1 | market-data-fe | reading-layout-shell | Gray-box Reading Regions (Context, Analysis, Classification, Evidence, Market Data, Diagnostics) per adopted Reading contract; spatial structure from Figma wireframe; brand tokens/components for chrome and region chrome | Proposed | |
-| 2 | market-data-fe | reading-analysis-composition | Gray-box Analysis Region internals (peer Assessments, Recommendation, Narrative) per adopted Analysis contract; hierarchy and anti-patterns from Analysis visual-definitions; brand tokens/components | Proposed | |
+| 1 | market-data-fe | reading-layout-shell | Gray-box Reading Regions (Context, Analysis, Classification, Evidence, Market Data, Diagnostics) per adopted Reading contract; spatial structure from Figma wireframe; brand tokens/components for chrome and region chrome | Pending | |
+| 2 | market-data-fe | reading-analysis-composition | Gray-box Analysis Region internals (peer Assessments, Recommendation, Narrative) per adopted Analysis contract; hierarchy and anti-patterns from Analysis visual-definitions; brand tokens/components | Pending | |
 
 ## UX sources
 
@@ -49,4 +49,4 @@ Users read one Symbol in a coherent analytical workspace: Context frames the Sym
 
 - Figma **wireframe** is the structural reference for gray-box placement; paste a node-specific Figma URL here when available. Do not treat missing hi-fi frames as a blocker.
 - Depends on shipped `design-system-shell` (brand kit + app layout) and existing market surfaces for data wiring; this epic reshapes Reading composition, not first-time API connectivity.
-- Next: `create ux features for epic reading-layout` to materialize adopted contracts and append FE `feature_list` entries.
+- Adopted contracts live in `market-data-fe/knowledge/ux/` (`reading-contract.md`, `analysis-contract.md`). Feature slugs are `Pending` in FE `work/feature_list.json`. Next: optionally `create release {version}`, then `Start Feature reading-layout-shell` in `market-data-fe`.
