@@ -47,6 +47,6 @@ Users read one Symbol in a coherent analytical workspace: Context frames the Sym
 
 ## Notes
 
-- Figma **wireframe** is the structural reference for gray-box placement; paste a node-specific Figma URL here when available. Do not treat missing hi-fi frames as a blocker.
+- Figma **wireframe** (structural SoT): https://www.figma.com/design/opTJ1E7ZHIgpLPQTw1YtKP/Reading-Layout-Wireframe?node-id=0-1 — gray-box fidelity only; hi-fi frames are not a delivery gate.
 - Depends on shipped `design-system-shell` (brand kit + app layout) and existing market surfaces for data wiring; this epic reshapes Reading composition, not first-time API connectivity.
-- Adopted contracts live in `market-data-fe/knowledge/ux/` (`reading-contract.md`, `analysis-contract.md`). Feature slugs are `Pending` in FE `work/feature_list.json`. Next: optionally `create release {version}`, then `Start Feature reading-layout-shell` in `market-data-fe`.
+- Adopted contracts live in `market-data-fe/knowledge/ux/` (`reading-contract.md`, `analysis-contract.md`). Features `reading-layout-shell` and `reading-analysis-composition` shipped; post-ship wireframe alignment amends those Done Features in place.
