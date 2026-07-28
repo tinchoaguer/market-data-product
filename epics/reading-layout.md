@@ -3,7 +3,7 @@ id: 9
 slug: reading-layout
 title: Reading Layout
 outcome: FE presents a Symbol Reading as a structured workspace — Regions and Analysis units from brand visual-definitions, gray-box fidelity from the Figma wireframe, styled with brand tokens/components.
-status: Planned
+status: Done
 retrospective: false
 repos: [market-data-fe]
 ---
@@ -18,8 +18,8 @@ Users read one Symbol in a coherent analytical workspace: Context frames the Sym
 
 | Order | Repo | Slug | Intent | Status | Release |
 |------:|------|------|--------|--------|---------|
-| 1 | market-data-fe | reading-layout-shell | Gray-box Reading Regions (Context, Analysis, Classification, Evidence, Market Data, Diagnostics) per adopted Reading contract; spatial structure from Figma wireframe; brand tokens/components for chrome and region chrome | Pending | |
-| 2 | market-data-fe | reading-analysis-composition | Gray-box Analysis Region internals (peer Assessments, Recommendation, Narrative) per adopted Analysis contract; hierarchy and anti-patterns from Analysis visual-definitions; brand tokens/components | Pending | |
+| 1 | market-data-fe | reading-layout-shell | Gray-box Reading Regions (Context, Analysis, Classification, Evidence, Market Data, Diagnostics) per adopted Reading contract; spatial structure from Figma wireframe; brand tokens/components for chrome and region chrome | Done | |
+| 2 | market-data-fe | reading-analysis-composition | Gray-box Analysis Region internals (peer Assessments, Recommendation, Narrative) per adopted Analysis contract; hierarchy and anti-patterns from Analysis visual-definitions; brand tokens/components | Done | |
 
 ## UX sources
 
@@ -30,11 +30,11 @@ Users read one Symbol in a coherent analytical workspace: Context frames the Sym
 
 ## Acceptance (product)
 
-- [ ] Symbol Reading in FE exposes the Reading Regions as a stable workspace structure (not a flat data dump or equal-weight card wall).
-- [ ] Analysis is the primary interpretive Region; supporting Regions do not overpower it in the initial viewport.
-- [ ] Analysis Region composition follows peer Assessments + Recommendation/Narrative rules (no invented Overall/Synthesis layer).
-- [ ] Layout fidelity is gray-box / structural (wireframe-aligned), implemented with brand tokens and components in FE.
-- [ ] Spec/Implement work in FE uses adopted `knowledge/ux/*-contract.md` only — harness does not read brand.
+- [x] Symbol Reading in FE exposes the Reading Regions as a stable workspace structure (not a flat data dump or equal-weight card wall).
+- [x] Analysis is the primary interpretive Region; supporting Regions do not overpower it in the initial viewport.
+- [x] Analysis Region composition follows peer Assessments + Recommendation/Narrative rules (no invented Overall/Synthesis layer).
+- [x] Layout fidelity is gray-box / structural (wireframe-aligned), implemented with brand tokens and components in FE.
+- [x] Spec/Implement work in FE uses adopted `knowledge/ux/*-contract.md` only — harness does not read brand.
 
 ## Out of scope
 
@@ -50,3 +50,4 @@ Users read one Symbol in a coherent analytical workspace: Context frames the Sym
 - Figma **wireframe** (structural SoT): https://www.figma.com/design/opTJ1E7ZHIgpLPQTw1YtKP/Reading-Layout-Wireframe?node-id=0-1 — gray-box fidelity only; hi-fi frames are not a delivery gate.
 - Depends on shipped `design-system-shell` (brand kit + app layout) and existing market surfaces for data wiring; this epic reshapes Reading composition, not first-time API connectivity.
 - Adopted contracts live in `market-data-fe/knowledge/ux/` (`reading-contract.md`, `analysis-contract.md`). Features `reading-layout-shell` and `reading-analysis-composition` shipped; post-ship wireframe alignment amends those Done Features in place.
+- **Follow-on:** Region bodies, Evidence/Diagnostics behavior, and Reading-first navigation → epic [`reading-workspace-fidelity`](./reading-workspace-fidelity.md).

@@ -59,6 +59,13 @@
     "id": 9,
     "slug": "reading-layout",
     "title": "Reading Layout",
+    "status": "Done",
+    "retrospective": false
+  },
+  {
+    "id": 10,
+    "slug": "reading-workspace-fidelity",
+    "title": "Reading Workspace Fidelity",
     "status": "Planned",
     "retrospective": false
   }
