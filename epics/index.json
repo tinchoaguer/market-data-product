@@ -66,6 +66,13 @@
     "id": 10,
     "slug": "reading-workspace-fidelity",
     "title": "Reading Workspace Fidelity",
+    "status": "Done",
+    "retrospective": false
+  },
+  {
+    "id": 11,
+    "slug": "dashboard-visual-fidelity",
+    "title": "Dashboard Visual Fidelity",
     "status": "Planned",
     "retrospective": false
   }
