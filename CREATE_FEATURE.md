@@ -179,11 +179,23 @@ Repeat steps 3–5 for each target repo.
     "<observable, testable criterion>",
     "<…>"
   ],
-  "status": "Pending"
+  "status": "Pending",
+  "bump_version": "minor"
 }
 ```
 
 Status values (harness): `Pending` | `In Progress` | `Done` | `Blocked`
+
+`bump_version` is **required** on every new Feature: `major` | `minor` | `patch` | `none`.
+
+| Value | Use when |
+|-------|----------|
+| `major` | Breaking change for package consumers |
+| `minor` | Backward-compatible new capability |
+| `patch` | Fix or small non-breaking change |
+| `none` | No package publish for this Feature (docs-only, internal, or repo with no publish pipeline) |
+
+Today only **market-data-brand** automates npm versioning from this field (merge to `main` → bump + `v*` tag → publish). BE/FE still set `bump_version` for consistency; use `none` unless a publish pipeline exists for that repo.
 
 Only Orchestrator (and human gates) move status after creation. New Features are always `Pending`.
 

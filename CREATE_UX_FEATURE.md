@@ -102,7 +102,7 @@ Must **not** include:
 
 ## Feature entry schema
 
-Same schema as `CREATE_FEATURE.md`:
+Same schema as `CREATE_FEATURE.md` (including required `bump_version`):
 
 ```json
 {
@@ -114,9 +114,12 @@ Same schema as `CREATE_FEATURE.md`:
     "<observable UI / behavior criterion in this repo>",
     "<…>"
   ],
-  "status": "Pending"
+  "status": "Pending",
+  "bump_version": "minor"
 }
 ```
+
+`bump_version`: `major` | `minor` | `patch` | `none` — see `CREATE_FEATURE.md`. Brand automates publish from this field; FE/BE use `none` unless a publish pipeline exists.
 
 Acceptance must be testable inside PROJECT_ROOT. Prefer criteria that Spec Writer can turn into REQs using the adopted contract (structure, hierarchy, anti-patterns) without reading brand.
 
