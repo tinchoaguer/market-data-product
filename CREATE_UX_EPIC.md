@@ -31,6 +31,7 @@ Reuse by **reference** (do not fork the whole world):
 | Workspace folders / which repos may host Features | `CREATE_EPIC.md` |
 | Epic status rules, `index.json` shape, Release column | `CREATE_EPIC.md` |
 | When **not** to create an Epic (tiny single-repo task) | `CREATE_EPIC.md` |
+| Human decisions + Feature **Depends on** / phased creation | `CREATE_EPIC.md` |
 | Required `## UX sources` + next command | **This playbook** |
 
 ---
@@ -53,15 +54,41 @@ Do **not** use this playbook for outcomes without UX-definition handoff — use 
 3. Identify UX SoT paths under `market-data-brand/knowledge/visual-definitions/` and the adopt target repo + adopted path (`knowledge/ux/<topic>-contract.md`).
 4. Write `product/epics/<slug>.md` using the template below (**`## UX sources` is mandatory**).
 5. Append entry to `product/epics/index.json`.
-6. If Features already exist in repos, link real slugs + statuses; otherwise list **Proposed** slugs.
-7. Do **not** invent Feature specs; do **not** write adopted contracts here — that is `CREATE_UX_FEATURE.md`.
-8. Optional: assign Release column later via `CREATE_RELEASE.md`.
+6. Apply `CREATE_EPIC.md` **Human intervention** and **Feature dependencies** rules (Depends on column, `## Human decisions`, dependency notes). Add UX-specific Open decisions when SoT topic, adopt path, or contract interpretation is ambiguous.
+7. If Features already exist in repos, link real slugs + statuses; otherwise list **Proposed** slugs.
+8. Do **not** invent Feature specs; do **not** write adopted contracts here — that is `CREATE_UX_FEATURE.md`.
+9. Optional: assign Release column later via `CREATE_RELEASE.md`.
+
+---
+
+## Human intervention (UX additions)
+
+Reuse `CREATE_EPIC.md` human-decision rules in full. Additionally, mark an **Open** decision when:
+
+| Trigger | Examples |
+|---------|----------|
+| SoT / adopt ambiguity | Which `visual-definitions` topic maps to which adopted contract; multiple Reading stacks compete |
+| Contract interpretation | Mockup or product ask conflicts with brand Region rules (Overall/Synthesis, Evidence vs Analysis ownership) |
+| Refresh vs new Feature | Whether a visual-definitions change needs contract refresh only or a new Feature slice |
+
+Unresolved Open rows that block `create features` / specific slugs stop UX Feature Writer the same way as generic Feature Writer.
+
+---
+
+## Feature dependencies (UX)
+
+Same hard/soft rules and **BE→FE mock exception** as `CREATE_EPIC.md`.
+
+UX-typical hard chains:
+
+- Brand Feature that authors or changes `visual-definitions` (or kit) → FE UX Feature that adopts `knowledge/ux/<topic>-contract.md`.
+- Adopted-contract refresh does **not** invent a new Feature when the slug already exists; see `CREATE_UX_FEATURE.md` refresh-only mode.
 
 ---
 
 ## Template (`product/epics/<slug>.md`)
 
-Same frontmatter and body shape as `CREATE_EPIC.md`, **plus** required UX sources:
+Same frontmatter and body shape as `CREATE_EPIC.md` (including **Depends on**, `## Human decisions`, optional `## Dependency notes`), **plus** required UX sources:
 
 ```markdown
 ---
@@ -83,15 +110,23 @@ architecture: <optional relative path>
 
 ## Features
 
-| Order | Repo | Slug | Intent | Status | Release |
-|------:|------|------|--------|--------|---------|
-| 1 | market-data-fe | example-slug | … | Proposed | |
+| Order | Repo | Slug | Intent | Depends on | Status | Release |
+|------:|------|------|--------|------------|--------|---------|
+| 1 | market-data-fe | example-slug | … | | Proposed | |
 
 ## UX sources
 
 | Topic | SoT (brand) | Adopt into repo | Adopted path |
 |-------|-------------|-----------------|--------------|
 | Reading | knowledge/visual-definitions/ (Reading + Analysis stacks) | market-data-fe | knowledge/ux/reading-contract.md |
+
+## Human decisions
+
+None
+
+## Dependency notes
+
+<optional>
 
 ## Acceptance (product)
 
@@ -113,7 +148,6 @@ architecture: <optional relative path>
 - **Adopt into repo** must be a harness-adopting folder (see `CREATE_EPIC.md` workspace table).
 - **Adopted path** must be `knowledge/ux/<topic>-contract.md` relative to that repo (no sibling-repo paths).
 - Empty UX sources table → invalid UX Epic; fix or use generic `CREATE_EPIC.md` instead.
-
 ---
 
 ## Quality bar
@@ -121,6 +155,7 @@ architecture: <optional relative path>
 - Outcome is product language.
 - Features are vertically sliceable; one adopting repo per row.
 - UX sources rows have usable SoT + Adopted path under `knowledge/ux/`.
+- **Depends on** and `## Human decisions` follow `CREATE_EPIC.md` (present and accurate).
 - Keep the epic brief; deep UX SoT stays in brand; deep product notes may live under `product/knowledge/`.
 - Do not instruct Spec Writer to read brand.
 
@@ -133,7 +168,8 @@ Tell the user:
 1. Path of the new epic file.
 2. Which Feature slugs are `Proposed` vs already in `feature_list.json`.
 3. The `## UX sources` rows (topic → adopted path).
-4. Next step: **`create ux features for epic <slug>`** (UX Feature Writer) — **not** `create features for epic`.
-5. Then optionally `create release {version}`, then `Start Feature <slug>` in each PROJECT_ROOT.
+4. **Depends on** chains and any Open **Human decisions** (and what they block).
+5. Next step when gates allow: **`create ux features for epic <slug>`** (UX Feature Writer) — **not** `create features for epic`. If Open decisions block creation, stop there until Resolved.
+6. Then optionally `create release {version}`, then `Start Feature <slug>` in each PROJECT_ROOT (dependency + Order).
 
 Agent entrypoint: `product/agents/ux-epic-writer.md` (see `product/deployment.md`).

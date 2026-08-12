@@ -31,6 +31,7 @@ Reuse by **reference**:
 |---------|-----------|
 | Workspace folders / repo isolation | `CREATE_FEATURE.md` |
 | Feature JSON schema, status values | `CREATE_FEATURE.md` |
+| Human-decision + dependency gates before creating Features | `CREATE_FEATURE.md` (gates) + `CREATE_EPIC.md` (Epic SoT) |
 | Quality bar for description/acceptance (repo-local, observable) | `CREATE_FEATURE.md` + this playbook’s UX rules |
 | Materialize `knowledge/ux/*-contract.md` | **This playbook** |
 | Next command after UX Epic | **`create ux features for epic`** (this playbook) |
@@ -42,14 +43,17 @@ Reuse by **reference**:
 Create when:
 
 - an Epic has a non-empty `## UX sources` table, **and**
-- one or more Feature rows are `Proposed` (or the user asks to refresh adopted contracts for that epic).
+- one or more Feature rows are `Proposed` (or the user asks to refresh adopted contracts for that epic), **and**
+- Epic **human-decision** and **dependency** gates allow those rows (`CREATE_FEATURE.md` Gates + `CREATE_EPIC.md` / `CREATE_UX_EPIC.md`).
 
 Do **not**:
 
 - use this playbook for Epics without UX sources (use `CREATE_FEATURE.md`);
 - create Features inside `harness/` or `product/`;
 - invent full `specs/<slug>/` while only adding the backlog entry;
-- write HTTP/DTO field maps into the adopted contract (Spec Writer owns maps in `design.md`).
+- write HTTP/DTO field maps into the adopted contract (Spec Writer owns maps in `design.md`);
+- create Features while Open human decisions block `create features` (or those slugs);
+- create dependent Features while hard **Depends on** rows are not `Done` (same phased rule as `CREATE_FEATURE.md`; BE→FE mock exception only when the Epic says so — not for brand→FE).
 
 ---
 
@@ -57,25 +61,27 @@ Do **not**:
 
 1. Identify the Epic: read `product/epics/<slug>.md`.
 2. **Require** `## UX sources` with at least one row for each PROJECT_ROOT that will receive a Feature. If missing or unusable → **stop** and ask (do not invent SoT).
-3. For each target repo in the Epic Features table that you are creating/updating:
+3. Apply **Gates before creating Features** from `CREATE_FEATURE.md` (human decisions + Depends on). If blocked → **stop** or create only eligible rows; do not invent Resolutions.
+4. For each **eligible** target repo / Feature row in the Epic Features table:
    1. Confirm harness adoption (`CREATE_FEATURE.md` workspace table).
    2. Match Epic Feature rows to `## UX sources` rows for that repo.
    3. Read brand SoT under `market-data-brand/knowledge/visual-definitions/` for those topics.
    4. **Write or update** `<PROJECT_ROOT>/knowledge/ux/<topic>-contract.md` (see Contract shape below).
    5. Read `work/feature_list.json`; pick next `id` if appending.
    6. Append or update Feature entry (`Pending` for new entries) with description/acceptance that reference the **local** adopted path and observable UI criteria.
-4. Update Epic Features table: `Proposed` → `Pending`, confirm slugs; preserve **Release** if set.
-5. Do **not** create `specs/<slug>/`, do **not** edit `work/progress/`, do **not** run Orchestrator stages.
-6. Repeat for each target repo / Feature row in scope.
+5. Update Epic Features table: eligible `Proposed` → `Pending`, confirm slugs; preserve **Depends on** and **Release** if set.
+6. Do **not** create `specs/<slug>/`, do **not** edit `work/progress/`, do **not** run Orchestrator stages.
+7. Report created vs still-Proposed (waiting on human / deps) per `CREATE_FEATURE.md` “After creating”.
 
 ### Refresh-only mode
 
 If the user asks to regenerate adopted contracts after brand SoT changed:
 
+- First check Open human decisions that block refresh or In Progress Spec re-approval; stop and ask if blocked.
 - Update `knowledge/ux/<topic>-contract.md` from current SoT + Epic UX sources.
 - Do **not** duplicate Feature entries if slugs already exist; optionally tighten acceptance if the contract’s observable rules changed.
 - Report which contracts were refreshed and whether In Progress Features may need Spec re-approval.
-
+- Refresh-only does **not** bypass the dependency gate for **creating new** Feature slugs.
 ---
 
 ## Adopted contract shape
@@ -133,6 +139,7 @@ Acceptance must be testable inside PROJECT_ROOT. Prefer criteria that Spec Write
 - Description/acceptance stay repo-local and observable.
 - Data-map is **not** produced here — Spec Writer writes it in `specs/<slug>/design.md`.
 - Prefer Epic proposed slugs; keep slugs stable and kebab-case.
+- Human-decision and dependency gates from `CREATE_FEATURE.md` are honored.
 
 ---
 
@@ -140,10 +147,12 @@ Acceptance must be testable inside PROJECT_ROOT. Prefer criteria that Spec Write
 
 Tell the user:
 
-1. Repo path(s), new `id` / `slug` for each `feature_list.json` entry.
+1. Repo path(s), new `id` / `slug` for each `feature_list.json` entry created in this pass.
 2. Paths of adopted contracts created or updated (`knowledge/ux/…`).
 3. Whether the Epic table was updated (`Proposed` → `Pending`).
-4. Next step: open that repo as PROJECT_ROOT, start Orchestrator, `Start Feature <slug>`.
-5. Remind: Spec Writer owns `specs/<slug>/` (including any payload→Region map in `design.md`); human approves before Implementation.
+4. Which rows remain `Proposed` (Open human decision vs waiting on Depends on Done / publish).
+5. Next step for created Features: open that repo as PROJECT_ROOT, start Orchestrator, `Start Feature <slug>` (dependency + Order).
+6. Remind: Spec Writer owns `specs/<slug>/` (including any payload→Region map in `design.md`); human approves before Implementation.
+7. If dependents were held back: after dependency Features are `Done`, re-run `create ux features for epic <slug>`.
 
 Agent entrypoint: `product/agents/ux-feature-writer.md` (see `product/deployment.md`).

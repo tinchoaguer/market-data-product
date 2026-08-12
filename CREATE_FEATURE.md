@@ -139,31 +139,74 @@ Adopting-repo Features must not require creating or updating files outside their
 Create when:
 
 - work is a vertically sliceable outcome in **one** repo, **or**
-- an Epic lists a `Proposed` slug that must enter that repo’s backlog.
+- an Epic lists a `Proposed` slug that must enter that repo’s backlog, **and**
+- Epic **human-decision** and **dependency** gates allow that row (see below).
 
 Do **not**:
 
 - fold multi-repo work into one Feature;
 - create Features inside `harness/` or `product/`;
 - invent full `specs/<slug>/` while only adding the backlog entry;
-- start Implementation without `Start Feature` / Spec Writer / human approval.
+- start Implementation without `Start Feature` / Spec Writer / human approval;
+- create Features while Epic Open human decisions block `create features` (or block those slugs);
+- create a dependent Feature while any hard **Depends on** Feature is not yet `Done` (unless the Epic’s BE→FE mock exception applies to that row).
 
 If the outcome spans repos and no Epic exists, prefer `CREATE_EPIC.md` first, then Features per row.
+
+---
+
+## Gates before creating Features from an Epic
+
+Authority for what Epics must declare: `CREATE_EPIC.md` (Human intervention + Feature dependencies). Feature Writer **enforces** those gates here.
+
+### 1. Human decisions gate
+
+1. Read `product/epics/<slug>.md` → `## Human decisions`.
+2. If the section is missing on a new/updated Epic that should have it → **stop** and ask the user to complete the Epic (do not invent Resolutions).
+3. If any row is `Open` and **Blocks** includes `create features` (whole epic) → **stop**. Report the Open decisions; create **zero** Feature entries.
+4. If an Open row **Blocks** specific slugs only → skip those slugs; may create other eligible rows.
+5. Only `Resolved` or `None` clears the gate for the blocked scope.
+
+Do **not** mark human decisions Resolved yourself. Wait for explicit user confirmation.
+
+### 2. Dependency gate (phased creation)
+
+1. Read each Feature row’s **Depends on** (and `## Dependency notes`).
+2. A row is **eligible** to create when every hard dependency slug is `Done` in the dependency’s repo `work/feature_list.json` (and publish notes are satisfied when stated — e.g. brand version published).
+3. Rows with empty Depends on (or soft-only / `mock-ok` BE→FE per Epic) are eligible in this pass if the human gate allows.
+4. Create **only** eligible `Proposed` rows in this run. Leave ineligible dependents as `Proposed` on the Epic.
+5. After dependency Features reach `Done`, the user runs `create features for epic <slug>` again; then create the newly eligible dependents (expanding description/acceptance with knowledge of the shipped dependency — e.g. consume brand `^x.y.0`).
+
+**Example (brand → FE):**
+
+```text
+Pass 1: create brand/dashboard-surface-kit only
+        → Start Feature … → Done + publish 0.2.0
+Pass 2: create fe/dashboard-app-chrome (Depends on: dashboard-surface-kit)
+```
+
+**Exception (BE → FE mocks):** If the Epic marks the FE row as mock-ok (Dependency notes / empty Depends on with note), FE may be created without waiting for BE Done. Brand → FE hard deps never use this exception.
+
+### Direct `create feature` (no Epic)
+
+If the user asks for a Feature without an Epic, still ask whether cross-repo deps or product decisions exist. Prefer creating/updating an Epic when the outcome spans repos or needs human decisions.
 
 ---
 
 ## Steps
 
 1. Identify target repo(s). One Feature entry **per** repo that owns work.
-2. If linking an Epic: read `product/epics/<slug>.md` and use its proposed slug/intent when sensible.
-3. In that repo, read `work/feature_list.json` and pick next `id` (max + 1).
-4. Choose `slug` (kebab-case, unique **in that repo**). Prefer Epic’s proposed slug if present.
-5. Append a Feature entry (schema below). Status must be `Pending`.
-6. Optionally update the Epic Features table: set Status from `Proposed` → `Pending`, confirm the slug, and preserve the **Release** column if already set (do not invent a release here — use `CREATE_RELEASE.md`).
-7. Do **not** create `specs/<slug>/`, do **not** edit `work/progress/current.md`, do **not** run Orchestrator stages.
-8. If the target folder has no harness layout yet (see Workspace folders table): stop and tell the user to adopt via `harness/governance/deployment.md` before adding Features.
+2. If linking an Epic: read `product/epics/<slug>.md` and apply **Gates before creating Features** (human decisions + dependencies). Abort or partially create per those rules.
+3. Among eligible rows only: use the Epic’s proposed slug/intent when sensible.
+4. In that repo, read `work/feature_list.json` and pick next `id` (max + 1).
+5. Choose `slug` (kebab-case, unique **in that repo**). Prefer Epic’s proposed slug if present.
+6. Append a Feature entry (schema below). Status must be `Pending`.
+7. Optionally update the Epic Features table: set Status from `Proposed` → `Pending`, confirm the slug, preserve **Depends on** and **Release** if already set (do not invent a release here — use `CREATE_RELEASE.md`).
+8. Do **not** create `specs/<slug>/`, do **not** edit `work/progress/current.md`, do **not** run Orchestrator stages.
+9. If the target folder has no harness layout yet (see Workspace folders table): stop and tell the user to adopt via `harness/governance/deployment.md` before adding Features.
+10. Report which rows were created, which remain `Proposed` (waiting on deps or human decisions), and the next command when gates clear.
 
-Repeat steps 3–5 for each target repo.
+Repeat steps 4–6 for each eligible target repo / row.
 
 ---
 
@@ -209,6 +252,7 @@ Only Orchestrator (and human gates) move status after creation. New Features are
 - **Vertically sliceable** — Spec Writer can produce requirements/design/tasks without inventing other repos’ work (`harness/governance/spec_guidelines.md` Feature scope).
 - **Slug stable** — matches Epic table when linked; kebab-case; no reuse of Done slugs for different intent.
 - **Cross-repo links** — live in the Epic Features table (and Release), not in adopting-repo descriptions, Specs, or knowledge.
+- **Gates honored** — no backlog entry while blocked by Open human decisions or unfinished hard Depends on (except documented BE→FE mock-ok).
 - Prefer **replace over patch** when an Epic supersedes prior Features (note that in the Epic).
 
 ---
@@ -217,10 +261,12 @@ Only Orchestrator (and human gates) move status after creation. New Features are
 
 Tell the user:
 
-1. Repo path(s) and new `id` / `slug` for each `feature_list.json` entry.
+1. Repo path(s) and new `id` / `slug` for each `feature_list.json` entry created in this pass.
 2. Whether an Epic was updated (`Proposed` → `Pending`) or still needs linking.
-3. Next step: open that repo as PROJECT_ROOT (or focus it in the multi-root workspace), start the Orchestrator, run `Start Feature <slug>` in the suggested Epic order.
-4. Remind: Spec Writer owns `specs/<slug>/`; human approves before Implementation.
+3. Which Epic rows remain `Proposed` and **why** (Open human decision vs waiting on Depends on Done / publish).
+4. Next step for created Features: open that repo as PROJECT_ROOT, start the Orchestrator, run `Start Feature <slug>` in dependency + Order sequence.
+5. Remind: Spec Writer owns `specs/<slug>/`; human approves before Implementation.
+6. If dependents were held back: after dependency Features are `Done`, re-run `create features for epic <slug>`.
 
 ---
 

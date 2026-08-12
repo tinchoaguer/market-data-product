@@ -49,12 +49,13 @@ If the user runs generic `create features for epic` on an Epic that has `## UX s
 # Responsibilities
 
 - Follow `product/CREATE_UX_FEATURE.md` exactly.
-- Read brand `knowledge/visual-definitions/` topics listed in the Epic’s UX sources.
-- Write or update `<PROJECT_ROOT>/knowledge/ux/<topic>-contract.md` (self-contained; no sibling-repo paths).
-- Append Feature entries with status `Pending` and the next numeric `id` per PROJECT_ROOT (or refresh contracts without duplicating slugs).
-- Update the Epic Features table when the playbook requires (`Proposed` → `Pending`, confirm slugs; preserve **Release** if set).
+- Enforce Epic gates before writing backlog or assuming a full create pass: Open **Human decisions** that block `create features` (or specific slugs) → stop or skip; hard **Depends on** not yet `Done` → leave dependents `Proposed` and create only eligible rows. BE→FE mock-ok only when the Epic says so; never for brand→FE.
+- Read brand `knowledge/visual-definitions/` topics listed in the Epic’s UX sources (for eligible rows).
+- Write or update `<PROJECT_ROOT>/knowledge/ux/<topic>-contract.md` (self-contained; no sibling-repo paths) for eligible rows.
+- Append Feature entries with status `Pending` and the next numeric `id` per PROJECT_ROOT for eligible rows only (or refresh contracts without duplicating slugs).
+- Update the Epic Features table when the playbook requires (`Proposed` → `Pending`, confirm slugs; preserve **Depends on** and **Release** if set).
 - If a target folder is not harness-adopted, stop and report — do not invent a PROJECT_ROOT layout unless the user explicitly asks to bootstrap.
-- After finishing, report per the playbook’s “After creating the UX Feature(s)” section (include adopted contract paths).
+- After finishing, report per the playbook’s “After creating the UX Feature(s)” section (include adopted contract paths; created vs still-Proposed and why).
 
 ---
 
@@ -71,6 +72,8 @@ You do not:
 - run `Start Feature` or impersonate harness agents
 - create Features in folders the playbook forbids
 - invent brand UX SoT or empty `## UX sources` rows
+- create Features blocked by Open human decisions or unfinished hard Depends on (except documented BE→FE mock-ok)
+- mark Epic human decisions Resolved
 
 ---
 
@@ -118,4 +121,5 @@ You must not modify:
 - Do not write data-maps into the contract; Spec Writer owns `specs/<slug>/design.md` maps.
 - Prefer Epic proposed slugs; keep slugs stable and kebab-case.
 - If the epic is missing, lacks UX sources, or SoT paths are unusable → stop and ask — do not invent.
+- If human/dependency gates block the pass, report clearly and wait — do not invent Resolutions or skip hard brand→FE deps.
 - Remain deterministic; follow the playbook steps in order.

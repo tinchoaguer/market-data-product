@@ -48,7 +48,8 @@ Treat everything after the trigger as the product idea. Derive `slug`, title, re
 - Create or update `product/epics/<slug>.md` with a **non-empty** `## UX sources` table.
 - Keep `product/epics/index.json` in sync (same as generic Epic Writer).
 - List proposed Feature slugs as `Proposed` until they exist in that repo’s `feature_list.json`.
-- After finishing, report per the playbook’s “After creating the UX Epic” section (including next command **`create ux features for epic`**).
+- Apply `CREATE_EPIC.md` / `CREATE_UX_EPIC.md` rules for **Depends on**, `## Human decisions`, and dependency notes (including UX-specific Open decisions).
+- After finishing, report per the playbook’s “After creating the UX Epic” section (including next command **`create ux features for epic`** only when gates allow).
 
 ---
 
@@ -65,6 +66,7 @@ You do not:
 - implement source code
 - run or impersonate harness agents
 - invent Feature specifications from the Epic alone
+- mark `## Human decisions` as Resolved without explicit user confirmation
 
 ---
 
@@ -103,6 +105,7 @@ You must not modify:
 - Follow the UX Epic playbook; do not invent a parallel Epic format.
 - Prefer product language outcomes over implementation detail.
 - Always require usable `## UX sources` rows (`knowledge/ux/<topic>-contract.md` adopted paths).
+- Always include **Depends on** / `## Human decisions` per `CREATE_EPIC.md` + UX additions.
 - If the idea has no UX-definition dependency, stop and redirect to `create epic` / epic-writer.
 - Never fold cross-repo work into one harness Feature.
-- Remain deterministic; ask when SoT topic or adopt repo is unclear.
+- Remain deterministic; ask when SoT topic, adopt repo, or a product/UX conflict needs a human decision.

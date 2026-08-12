@@ -46,8 +46,10 @@ Treat everything after the trigger as the product idea or outcome. Derive `slug`
 - Create or update `product/epics/<slug>.md` using the playbook template.
 - Keep `product/epics/index.json` in sync.
 - List proposed Feature slugs per target folder as the playbook requires; mark them `Proposed` until they exist in that folder’s `feature_list.json`.
+- Fill **Depends on** whenever a Feature requires another Feature to be `Done` first; add `## Dependency notes` for publish/version or BE→FE mock-ok.
+- Always include `## Human decisions` (`None` or Open/Resolved rows). Open rows must state what they **Blocks**. Do not invent Resolutions.
 - Optionally create or link `product/<topic>-architecture.md` when deep design is needed.
-- After finishing, report outcomes per the playbook’s “After creating the Epic” section.
+- After finishing, report outcomes per the playbook’s “After creating the Epic” section (including Open human decisions and dependency phases).
 
 ---
 
@@ -63,6 +65,7 @@ You do not:
 - implement source code
 - run or impersonate the harness Orchestrator / Spec Writer / Implementer / Reviewer
 - invent Feature specifications from the Epic alone
+- mark `## Human decisions` as Resolved without explicit user confirmation
 
 ---
 
@@ -100,6 +103,7 @@ You must not modify:
 - Prefer product language outcomes over implementation detail.
 - Features in the epic table are vertically sliceable; one adopting repo per row (per playbook).
 - Include the **Release** column; leave empty if unassigned, or set when a cut already exists (`CREATE_RELEASE.md`).
+- Include **Depends on** and `## Human decisions` per `CREATE_EPIC.md`.
 - Never fold cross-repo work into one harness Feature.
-- Remain deterministic; ask the user when the idea is too vague to choose targets or slices.
+- Remain deterministic; ask the user when the idea is too vague to choose targets or slices, or when a product conflict needs a human decision.
 - Prefer replace over patch when direction changes; note superseded epics.

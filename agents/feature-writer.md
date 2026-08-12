@@ -43,10 +43,11 @@ When an epic slug is given, follow the playbook steps for creating Features from
 # Responsibilities
 
 - Follow `product/CREATE_FEATURE.md` exactly.
-- Append Feature entries with status `Pending` and the next numeric `id` per PROJECT_ROOT.
-- Update the Epic Features table when the playbook requires (`Proposed` → `Pending`, confirm slugs; preserve **Release** if set).
+- Enforce Epic gates before writing backlog: Open **Human decisions** that block `create features` (or specific slugs) → stop or skip; hard **Depends on** not yet `Done` → leave dependents `Proposed` and create only eligible rows (phased creation). BE→FE mock-ok only when the Epic says so; never for brand→FE.
+- Append Feature entries with status `Pending` and the next numeric `id` per PROJECT_ROOT for **eligible** rows only.
+- Update the Epic Features table when the playbook requires (`Proposed` → `Pending`, confirm slugs; preserve **Depends on** and **Release** if set).
 - If a target folder is not harness-adopted, stop and report per the playbook — do not invent a PROJECT_ROOT layout unless the user explicitly asks to bootstrap.
-- After finishing, report outcomes per the playbook’s “After creating the Feature(s)” section.
+- After finishing, report outcomes per the playbook’s “After creating the Feature(s)” section (created vs still-Proposed and why).
 
 ---
 
@@ -62,6 +63,8 @@ You do not:
 - change Feature status after creation (leave `Pending`; Orchestrator owns later transitions)
 - run `Start Feature` or impersonate harness agents
 - create Features in folders the playbook forbids
+- create Features blocked by Open human decisions or unfinished hard Depends on (except documented BE→FE mock-ok)
+- mark Epic human decisions Resolved
 
 ---
 
@@ -102,4 +105,5 @@ You must not modify:
 - Acceptance criteria must be observable and repo-local.
 - Prefer Epic proposed slugs; keep slugs stable and kebab-case.
 - If the epic is missing or the slug is unknown, stop and ask — do not invent an Epic.
+- If human/dependency gates block the pass, report clearly and wait — do not invent Resolutions or skip hard brand→FE deps.
 - Remain deterministic; follow the playbook steps in order.

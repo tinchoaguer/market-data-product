@@ -17,6 +17,7 @@ Product-level planning lives here. Per-repo SDD + harness stay in each project (
 - Maturity scores are refreshed from `work/` + epics/releases evidence; they do not replace Features or Releases.
 - **Isolation:** BE, FE, and Brand do not document sibling repos, `shared/`, or workspace topology. Only `product` and `shared` know how the workspace integrates (see `CREATE_FEATURE.md` Repo isolation and [`knowledge/workspace-integration.md`](knowledge/workspace-integration.md)).
 - **UX definitions:** when UI must adopt brand `visual-definitions`, use the UX path (`create ux epic` / `create ux features for epic`) so Feature Writer materializes `knowledge/ux/*-contract.md` in the target repo. Policy: [`knowledge/ux-definitions-handoff.md`](knowledge/ux-definitions-handoff.md).
+- **Human decisions & deps:** Epics declare `## Human decisions` and Feature **Depends on** (`CREATE_EPIC.md`). Feature Writers create only eligible rows — blocked by Open human decisions or unfinished hard deps until resolved / Done. BE→FE may use mocks to parallelize; brand→FE does not.
 
 ## Agents (portable)
 
