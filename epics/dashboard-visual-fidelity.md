@@ -3,7 +3,7 @@ id: 11
 slug: dashboard-visual-fidelity
 title: Dashboard Visual Fidelity
 outcome: The Symbol Reading workspace visually matches the product dashboard mockup, using market-data-brand tokens and components — not a parallel FE design system.
-status: Active
+status: Done
 retrospective: false
 repos: [market-data-brand, market-data-fe, product]
 ---
@@ -21,13 +21,13 @@ Successor to gray-box Reading delivery (`reading-layout`, `reading-workspace-fid
 | Order | Repo | Slug | Intent | Status | Release |
 |------:|------|------|--------|--------|---------|
 | 1 | market-data-brand | dashboard-surface-kit | Close kit/token gaps required by the mockup (e.g. header density, theme-toggle control, timeframe pill pattern, sparkline/chart chrome recipes, live/status footer patterns, semantic up/down emphasis) so FE can compose without inventing a parallel design system | Done | |
-| 2 | market-data-fe | dashboard-app-chrome | Adapt `AppLayout` / brand `AppShell` chrome to the mockup using published brand `0.2.0` (`AppHeaderBar` slim, `ThemeToggle`, `StatusFooter`/`LiveStatus`): slim header, brand mark + name, nav presentation, theme toggle, optional breadcrumb, date/source/Live footer — Reading remains the primary product surface | Pending | |
-| 3 | market-data-fe | dashboard-hero-band | Compose the top Reading band to the mockup hero on brand `0.2.0` (`ChartFrame`, `SegmentedControl`/`TimeframeControl`, semantic up/down): Symbol identity with adjacent observation (price, change, sparkline, timeframe pills, 24H high/low/vol, last update) without making Context own scores or recommendations | Pending | |
-| 4 | market-data-fe | dashboard-analysis-cards | Restyle Analysis Assessment peers (Regime, Risk, Economic, Exposure) as the mockup’s four vertical cards (icon, label, badge, score, summary) using brand `0.2.0` Card/Badge/Text primitives | Pending | |
-| 5 | market-data-fe | dashboard-observation-row | Restyle Market Data Region as the mockup middle row on brand `0.2.0`: price area chart in `ChartFrame` (left) + Market Stats 24H card (right); timeframe controls via `SegmentedControl`/`TimeframeControl` | Pending | |
-| 6 | market-data-fe | dashboard-classification-surface | Restyle Classification Region as the mockup Factor/Score/Reason table (and compact score visualization if needed) using brand `0.2.0` Table/Card/Text — without inventing an Overall Assessment / Synthesis rollup that replaces the four dimensions | Pending | |
+| 2 | market-data-fe | dashboard-app-chrome | Adapt `AppLayout` / brand `AppShell` chrome to the mockup using published brand `0.2.0` (`AppHeaderBar` slim, `ThemeToggle`, `StatusFooter`/`LiveStatus`): slim header, brand mark + name, nav presentation, theme toggle, optional breadcrumb, date/source/Live footer — Reading remains the primary product surface | Done | |
+| 3 | market-data-fe | dashboard-hero-band | Compose the top Reading band to the mockup hero on brand `0.2.0` (`ChartFrame`, `SegmentedControl`/`TimeframeControl`, semantic up/down): Symbol identity with adjacent observation (price, change, sparkline, timeframe pills, 24H high/low/vol, last update) without making Context own scores or recommendations | Done | |
+| 4 | market-data-fe | dashboard-analysis-cards | Restyle Analysis Assessment peers (Regime, Risk, Economic, Exposure) as the mockup’s four vertical cards (icon, label, badge, score, summary) using brand `0.2.0` Card/Badge/Text primitives | Done | |
+| 5 | market-data-fe | dashboard-observation-row | Restyle Market Data Region as the mockup middle row on brand `0.2.0`: price area chart in `ChartFrame` (left) + Market Stats 24H card (right); timeframe controls via `SegmentedControl`/`TimeframeControl` | Done | |
+| 6 | market-data-fe | dashboard-classification-surface | Restyle Classification Region as the mockup Factor/Score/Reason table (and compact score visualization if needed) using brand `0.2.0` Table/Card/Text — without inventing an Overall Assessment / Synthesis rollup that replaces the four dimensions | Done | |
 
-> Brand Order 1 `dashboard-surface-kit` is `Done` in `market-data-brand` (`work/feature_list.json` id 3) and published as `@maguer/market-data-brand@0.2.0`. FE ids 19–23 remain `Pending`. Next: bump FE to brand `^0.2.0`, then `Start Feature dashboard-app-chrome` (Order 2) and continue in Order.
+> All linked Features are `Done` in repo `work/feature_list.json`: brand id 3 (`dashboard-surface-kit`, published `@maguer/market-data-brand@0.2.0`); FE ids 19–23 (`dashboard-app-chrome` … `dashboard-classification-surface`). Epic status is `Done` per linked-Feature rule. Product acceptance below is still the visual SoT check against [`dashboard.png`](../dashboard.png) — residual mockup gaps (if any) need a follow-up epic/features, not reopening these Done slugs without human decision.
 
 ## Acceptance (product)
 
@@ -53,6 +53,7 @@ Successor to gray-box Reading delivery (`reading-layout`, `reading-workspace-fid
 ### Visual source of truth
 
 - Product mockup: [`dashboard.png`](../dashboard.png) (repo root of `market-data-product`).
+- Current implementation snapshot for gap review: [`iterations/market-data-fe.vercel.app_.png`](../iterations/market-data-fe.vercel.app_.png).
 - When specifying FE Features, copy or attach the mockup into that Feature’s spec/design artifacts as needed so the harness stays PROJECT_ROOT-local.
 
 ### Mockup → current FE mapping
