@@ -27,7 +27,7 @@ Successor to gray-box Reading delivery (`reading-layout`, `reading-workspace-fid
 | 5 | market-data-fe | dashboard-observation-row | Restyle Market Data Region as the mockup middle row on brand `0.2.0`: price area chart in `ChartFrame` (left) + Market Stats 24H card (right); timeframe controls via `SegmentedControl`/`TimeframeControl` | Done | |
 | 6 | market-data-fe | dashboard-classification-surface | Restyle Classification Region as the mockup Factor/Score/Reason table (and compact score visualization if needed) using brand `0.2.0` Table/Card/Text — without inventing an Overall Assessment / Synthesis rollup that replaces the four dimensions | Done | |
 
-> All linked Features are `Done` in repo `work/feature_list.json`: brand id 3 (`dashboard-surface-kit`, published `@maguer/market-data-brand@0.2.0`); FE ids 19–23 (`dashboard-app-chrome` … `dashboard-classification-surface`). Epic status is `Done` per linked-Feature rule. Product acceptance below is still the visual SoT check against [`dashboard.png`](../dashboard.png) — residual mockup gaps (if any) need a follow-up epic/features, not reopening these Done slugs without human decision.
+> All linked Features are `Done` in repo `work/feature_list.json`: brand id 3 (`dashboard-surface-kit`, published `@maguer/market-data-brand@0.2.0`); FE ids 19–23 (`dashboard-app-chrome` … `dashboard-classification-surface`). Epic status is `Done` per linked-Feature rule. Residual mockup gaps vs [`dashboard.png`](../dashboard.png) are tracked in successor epic [`dashboard-mockup-parity`](dashboard-mockup-parity.md) — do not reopen these Done slugs without human decision.
 
 ## Acceptance (product)
 

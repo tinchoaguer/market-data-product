@@ -75,5 +75,12 @@
     "title": "Dashboard Visual Fidelity",
     "status": "Done",
     "retrospective": false
+  },
+  {
+    "id": 12,
+    "slug": "dashboard-mockup-parity",
+    "title": "Dashboard Mockup Parity",
+    "status": "Planned",
+    "retrospective": false
   }
 ]
